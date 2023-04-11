@@ -1,0 +1,140 @@
+﻿@using BlogAppADO.Models.ModelContainers;
+@model IndexContainer
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<!-- Trending Topic Area Start -->
+<div class="trending-topic-area section-space--ptb_80">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="trending-topic-section-title">
+                <h3>Categories</h3>
+                <div class="trending-topic-navigation mt-30">
+                    <div class="trending-topic-button-prev navigation-button"><i class="icofont-long-arrow-left"></i></div>
+                    <div class="trending-topic-button-next navigation-button"><i class="icofont-long-arrow-right"></i></div>
+                </div>
+            </div>
+            <div class="trending-topic-item-wrap">
+                <div class="swiper-container trending-topic-slider-active">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" data-aos="fade-up">
+                            <div class="single-trending-topic-item">
+                                <a href="category-grid.html">
+                                    <img src="~/home/assets/images/topic/01_topic.jpg" alt="">
+                                    <h4 class="title">Travel</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide" data-aos="fade-up">
+                            <div class="single-trending-topic-item">
+                                <a href="category-grid.html">
+                                    <img src="~/home/assets/images/topic/02_topic.jpg" alt="">
+                                    <h4 class="title">Food</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide" data-aos="fade-up">
+                            <div class="single-trending-topic-item">
+                                <a href="category-grid.html">
+                                    <img src="~/home/assets/images/topic/03_topic.jpg" alt="">
+                                    <h4 class="title">Design</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide" data-aos="fade-up">
+                            <div class="single-trending-topic-item">
+                                <a href="category-grid.html">
+                                    <img src="~/home/assets/images/topic/04_topic.jpg" alt="">
+                                    <h4 class="title">Technology</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide" data-aos="fade-up">
+                            <div class="single-trending-topic-item">
+                                <a href="category-grid.html">
+                                    <img src="~/home/assets/images/topic/05_topic.jpg" alt="">
+                                    <h4 class="title">Marketing</h4>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Trending Topic Area End -->
+<h2 style="text-align:center">Blogs</h2>
+<div class="from-following-area section-space--ptb_80">
+    <div class="container">
+        <!-- Swiper -->
+        <div class="swiper-container following-slider-deactive">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="row row--17">
+                        <div class="from-following col">
+                            <div class="row row--17">
+                                
+
+                @{
+                    for (int i = 0; i < Model.IndexPosts.Count; i++)
+                    {
+                                        <div class="col-md-4 col-sm-4">
+                                            <!-- Single Following Post Start -->
+                                            <div class="single-following-post" data-aos="fade-up">
+                                                <div class="following-post-thum">
+                                                    <a href="/home/postdetails/@Model.IndexPosts[i].ID">
+                                                        @if (Model.IndexPosts[i].PhotoLink.StartsWith("https://"))
+                                                        {
+                                            <img src=@Model.IndexPosts[i].PhotoLink alt="Hatali Link">
+                                        }
+                                        else
+                                        {
+                                            <img src="https://s3.amazonaws.com/pixpa.com/com/articles/1516553730-shutterstock_429631015.jpg" alt="Hatali Link">
+                                        }
+                                        
+                                                    </a>
+                                                </div>
+                                                <div class="following-post-content">
+                                                    <div class="following-blog-post-top">
+                                                        <div class="trending-blog-post-category">
+                                                            <a href="#" class="btn-sm travel">@Model.IndexPosts[i].CategoryName</a>
+                                                        </div>
+                                                        <div class="following-blog-post-author">
+                                                            By <a href="#">@Model.IndexPosts[i].UserName</a>
+                                                        </div>
+                                                    </div>
+                                                    <h5 class="following-blog-post-title">
+                                                        <a href="/home/postdetails/@Model.IndexPosts[i].ID">
+                                                            @Model.IndexPosts[i].Title
+                                                        </a>
+                                                    </h5>
+                                                    <div class="following-blog-post-meta">
+                                                        <div class="post-meta-left-side">
+                                                            <span class="post-date">
+                                                                <i class="icofont-ui-calendar"></i>
+                                                                <a href="#">@Model.IndexPosts[i].PublishDate</a>
+                                                            </span>
+                                                        </div>
+                                                        <div class="post-meta-right-side">
+                                                            <a href="#"><img src="/home/assets/images/icons/small-bookmark.png" alt="" /></a>
+                                                            <a href="#"><img src="/home/assets/images/icons/heart.png" alt="" /></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- Single Following Post End -->
+                                        </div>
+                    }
+                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div> <!-- From Following Area End -->

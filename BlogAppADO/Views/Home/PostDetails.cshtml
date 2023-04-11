@@ -1,0 +1,202 @@
+﻿@using BlogAppADO.Models.ModelContainers;
+@model PostDetailsContainer
+@{
+    ViewData["Title"] = "PostDetails";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<div class="blog-details-wrapper section-space--ptb_80">
+    <div class="container">
+        <div class="row row--17">
+            <div class="blog-details-col-8">
+                <!-- blog details Post Start -->
+                <div class="blog-details-post-wrap">
+                    <div class="blog-details-thum">
+                        @if (Model.Post.PhotoLink.StartsWith("https://"))
+                        {
+                            <img src=@Model.Post.PhotoLink alt="Hatali Link">
+                        }
+                        else
+                        {
+                            <img src="https://s3.amazonaws.com/pixpa.com/com/articles/1516553730-shutterstock_429631015.jpg" alt="Hatali Link">
+                        }
+                    </div>
+                    <div class="blog-details-post-content">
+                        <div class="blog-details-meta-box">
+                            <div class="post-meta-left-side mb-2">
+                                <div class="trending-blog-post-category">
+                                    <a href="#" class="btn-sm travel">@Model.Category.Name</a>
+                                </div>
+                                <div class="following-blog-post-author">
+                                    By <a href="#">@Model.User.Name</a>
+                                </div>
+                            </div>
+
+                            <div class="post-mid-side mb-2">
+                                <span class="post-meta-left-side">
+                                    <span class="post-date">
+                                        <i class="icofont-ui-calendar"></i>
+                                        <a href="#">@Model.Post.PublishDate</a>
+                                    </span>
+                                </span>
+                                <span>10 min read</span>
+                            </div>
+
+                            <div class="post-meta-right-side mb-2">
+                                <a href="#"><img src="~/home/assets/images/icons/small-bookmark.png" alt="" /></a>
+                                <a href="#"><img src="~/home/assets/images/icons/heart.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <h3 class="following-blog-post-title">
+                            <a href="#">
+                                @Model.Post.Title
+                            </a>
+                        </h3>
+
+                        <div class="post-details-text">
+
+                            <p>
+                                @Model.Post.Details
+                            </p>
+
+                            <blockquote class="blockquote-box">
+                                <p class="blockquote-text">
+                                    Lorem Ipsum is simply dummy text of the printing and
+                                    types industry's standard dummy text ever and since the 1500s when
+                                    scrambled it to make a type specimen book.
+                                </p>
+                            </blockquote>
+
+                            <p>
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                                industry's standard dummy text ever since the 1500s when anden unknown printer took a galley of type and
+                                scrambled it to make a type specimen book. It has and survived not only five centuries, but also the leap
+                                into electronic typesetting, remaining essentially and unchanged. It was popularsed in the 1960 with release
+                                containing Lorem Ipsum passages desktop publishing software.
+                            </p>
+
+                            <div class="blog-details-tag-and-share-area">
+                                <div class="post-tag">
+                                    <a href="#" class="btn-medium fashion">Fashion</a>
+                                    <a href="#" class="btn-medium health">Health</a>
+                                    <a href="#" class="btn-medium travel">Travel</a>
+                                </div>
+                                <ul class="social-share-area">
+                                    <li><a href="#"><i class="icofont-facebook"></i></a></li>
+                                    <li><a href="#"><i class="icofont-skype"></i></a></li>
+                                    <li><a href="#"><i class="icofont-twitter"></i></a></li>
+                                    <li><a href="#"><i class="icofont-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div><!-- blog details Post End -->
+            </div>
+            <div class="blog-details-col-4">
+                <div class="following-author-area">
+                    <div class="author-image">
+                        <img src="~/home/assets/images/author/author-01.png" alt="">
+                    </div>
+                    <div class="author-title">
+                        <h4><a href="#">@Model.User.Name</a></h4>
+                        <p>Author, Dingcode</p>
+                    </div>
+                    <div class="author-details">
+                        <p>
+                            @Model.User.Bio
+                        </p>
+
+                        <div class="author-post-share">
+                            <ul class="social-share-area">
+                                <li><a href="#"><i class="icofont-facebook"></i></a></li>
+                                <li><a href="#"><i class="icofont-skype"></i></a></li>
+                                <li><a href="#"><i class="icofont-twitter"></i></a></li>
+                                <li><a href="#"><i class="icofont-linkedin"></i></a></li>
+                            </ul>
+                        </div>
+
+                        <div class="button-box">
+                            <a href="~/home/WritersPosts/@Model.User.ID" class="btn">View Profile <i class="icofont-long-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div> <!-- Blog Details Wrapper End -->
+
+
+
+<div class="comment-area section-space--pt_60 section-space--pb_100">
+    <div class="container">
+
+
+        <div class="row">
+            <div class="col-lg-10 m-auto">
+                <div class="comment-list-wrapper">
+
+                    <h3 class="widget-title mb-30">Comments (3) </h3>
+                    <ol class="comment-list">
+                        @for (int i = 0; i < Model.Comments.Count; i++)
+                        {
+
+                        
+                        <li class="comment">
+                            <div class="comment-2">
+                                <div class="comment-author-info">
+                                    <div class="comment-author vcard">
+                                        <img width="72" height="72" alt="" src=@Model.Comments[i].UserPhotoLink>
+                                    </div>
+                                    <div class="comment-content">
+                                        <div class="meta">
+                                            <div class="comment-content-top">
+                                                <div class="comment-actions">
+                                                    <h6 class="fn">@Model.Comments[i].UserName</h6>
+                                                    <div class="comment-datetime"> Product Designer, USA </div> <span class="separator">||</span> <span class="time">@Model.Comments[i].AddedAt </span>
+                                                </div>
+                                            </div>
+                                            <a class="comment-reply-link" href="#"><i class="icofont-reply"></i> Reply</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="comment-text">
+                                    <p>
+                                        @Model.Comments[i].CommentMsg
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- comment End-->
+                        }
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-10 m-auto">
+                <div class="section-title">
+                    <h3 class="title">Leave a comment</h3>
+                </div>
+                <form action="/home/addcomment" method="post" class="comment-form-area">
+                    <input type="hidden" name="PostID" id="PostID" value=@Model.Post.ID />
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="single-input">
+                                <textarea name="Message" id="Message" placeholder="Massage"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="submit-button text-center">
+                                <button class="btn-large btn-bg-6 btn-primary" type="submit"> Submit Now <i class="icofont-long-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
