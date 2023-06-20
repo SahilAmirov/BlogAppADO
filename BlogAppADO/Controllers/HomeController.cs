@@ -32,6 +32,30 @@ namespace BlogAppADO.Controllers
                 indexPosts.PhotoLink = item.PhotoLink;
                 indexPosts.PublishDate = item.PublishDate;
                 indexPosts.UserName = userDal.GetUserWithId(item.UserID).Name;
+                indexPosts.UserID = item.UserID;
+                indexPosts.CategoryName = categoryDal.GetCategoryWithId(item.CategoryID).Name;
+
+                container.IndexPosts.Add(indexPosts);
+            }
+            return View(container);
+        }
+        [Route("home/CategoriesPosts/{categoryID}")]
+        public IActionResult CategoriesPosts(int categoryID)
+        {
+            //HttpContext.Session.SetString("Movie", "The Doctor");
+            //return Content(HttpContext.Session.GetString("Movie"));
+            IndexContainer container = new IndexContainer();
+            container.Categories = categoryDal.GetAll();
+
+            foreach (var item in postDal.GetPostsWithCategoryId(categoryID))
+            {
+                InPosts indexPosts = new InPosts();
+                indexPosts.ID = item.ID;
+                indexPosts.Title = item.Title;
+                indexPosts.Slug = item.Slug;
+                indexPosts.PhotoLink = item.PhotoLink;
+                indexPosts.PublishDate = item.PublishDate;
+                indexPosts.UserName = userDal.GetUserWithId(item.UserID).Name;
                 indexPosts.CategoryName = categoryDal.GetCategoryWithId(item.CategoryID).Name;
 
                 container.IndexPosts.Add(indexPosts);
@@ -83,6 +107,12 @@ namespace BlogAppADO.Controllers
         [HttpPost]
         public IActionResult Register(User user)
         {
+            User userCheck = userDal.GetUserWithEmail(user.Email);
+            if (userCheck != null) 
+            {
+                ViewBag.RegisterError = "User Already Exist!";
+                return View();
+            }
             userDal.AddUser(user);
             //HttpContext.Response.Cookies.Append("writerID", user.ID.ToString());
             int writerID = userDal.GetUserWithEmail(user.Email).ID;

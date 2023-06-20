@@ -117,6 +117,36 @@ namespace BlogAppADO.DataAccess
             }
         }
 
+        public List<Post> GetPostsWithCategoryId(int categoryID)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                var postList = new List<Post>();
+
+                connection.Open();
+                var command = new SqlCommand("SELECT ID, Title, Slug,Details, PhotoLink, PublishDate, UpdatedOn, UserID, CategoryID FROM ADO_Posts WHERE CategoryID = @categoryID", connection);
+                command.Parameters.AddWithValue("@categoryID", categoryID);
+                var reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    var postItem = new Post();
+                    postItem.ID = reader.GetInt32(0);
+                    postItem.Title = reader.GetString(1);
+                    postItem.Slug = reader.GetString(2);
+                    postItem.Details = reader.GetString(3);
+                    postItem.PhotoLink = reader.GetString(4);
+                    postItem.PublishDate = reader.GetDateTime(5);
+                    postItem.UpdatedOn = reader.GetDateTime(6);
+                    postItem.UserID = reader.GetInt32(7);
+                    postItem.CategoryID = reader.GetInt32(8);
+
+                    postList.Add(postItem);
+                }
+                return postList;
+            }
+        }
+
         public bool UpdatePost(UpdatePost post)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))

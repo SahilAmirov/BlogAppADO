@@ -26,10 +26,10 @@
                         @for (int i = 0; i < Model.WritersPostsPosts.Count; i++)
                         {
                             <div class="author-blog-post-wrap masonary-item cat--3">
-                                    <a href="~/home/postdetails/@Model.WritersPostsPosts[i].ID" class="author-blog-thum">
+                                    <a href="/home/postdetails/@Model.WritersPostsPosts[i].ID" class="author-blog-thum">
                                         @if (Model.WritersPostsPosts[i].PhotoLink.StartsWith("https://"))
                                         {
-                                            <img src=@Model.WritersPostsPosts[i].PhotoLink alt="Hatali Link">
+                                            <img src=@Model.WritersPostsPosts[i].PhotoLink  height="500px" alt="Hatali Link">
                                         }
                                         else
                                         {

@@ -14,7 +14,7 @@
                     <div class="blog-details-thum">
                         @if (Model.Post.PhotoLink.StartsWith("https://"))
                         {
-                            <img src=@Model.Post.PhotoLink alt="Hatali Link">
+                            <img width="800px" height="500px" src=@Model.Post.PhotoLink alt="Hatali Link">
                         }
                         else
                         {
@@ -97,7 +97,7 @@
             <div class="blog-details-col-4">
                 <div class="following-author-area">
                     <div class="author-image">
-                        <img src="~/home/assets/images/author/author-01.png" alt="">
+                        <img src=@Model.User.PhotoLink width="118px" height="118px" alt="">
                     </div>
                     <div class="author-title">
                         <h4><a href="#">@Model.User.Name</a></h4>
@@ -118,7 +118,7 @@
                         </div>
 
                         <div class="button-box">
-                            <a href="~/home/WritersPosts/@Model.User.ID" class="btn">View Profile <i class="icofont-long-arrow-right"></i></a>
+                            <a href="/home/WritersPosts/@Model.User.ID" class="btn">View Profile <i class="icofont-long-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>

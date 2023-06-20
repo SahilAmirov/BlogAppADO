@@ -20,4 +20,5 @@ public class InPosts
     public DateTime PublishDate { get; set; }
     public string CategoryName { get; set; }
     public string UserName { get; set; }
+    public int UserID { get; set; }
 }
